@@ -39,6 +39,9 @@ public class BigLog {
 		Dataset<Row> pivoted_dataset = rows.groupBy("monthnum").pivot("level").count();
 		
 		pivoted_dataset.orderBy("monthnum").show();
+		
+		//more pivot table details to follow
+		
 		//unique to spark
 		//System.out.println(rows.count());
 		//rows.show();
