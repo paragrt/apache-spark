@@ -10,7 +10,7 @@ public class SimpleApp {
 		
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 		// TODO Auto-generated method stub
-		String logFile = "/home/paragrt/Desktop/spark-2.4.3-bin-hadoop2.7/README.md";
+		String logFile = "src/main/resources/README.md";
 		SparkSession spark = SparkSession.builder().appName("Simple Application")
 				.config("spark.master", "local[*]")
 				.getOrCreate();

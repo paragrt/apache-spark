@@ -13,7 +13,7 @@ public class BigLog {
 
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 		// TODO Auto-generated method stub
-		String logFile = "/home/paragrt/Desktop/eclipse-wkspc/SparkTest/src/main/resources/biglog.txt";
+		String logFile = "src/main/resources/biglog.txt";
 		SparkSession spark = SparkSession.builder().appName("Simple Application").config("spark.master", "local[*]")
 				.getOrCreate();
 		

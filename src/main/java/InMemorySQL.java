@@ -7,7 +7,6 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.RowFactory;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.types.DataType;
 import org.apache.spark.sql.types.DataTypes;
 import org.apache.spark.sql.types.Metadata;
 import org.apache.spark.sql.types.StructField;
@@ -19,7 +18,6 @@ public class InMemorySQL {
 
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 		// TODO Auto-generated method stub
-		String logFile = "/home/paragrt/Desktop/eclipse-wkspc/SparkTest/src/main/resources/students.csv";
 		SparkSession spark = SparkSession.builder().appName("Simple Application").config("spark.master", "local[*]")
 				.getOrCreate();
 		
