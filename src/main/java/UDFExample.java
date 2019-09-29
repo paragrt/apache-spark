@@ -48,6 +48,7 @@ public class UDFExample {
 		//pivot table with aggregate methods avg and stddev
 		Dataset<Row> results = spark.sql("select level, date_format(datetime, 'MMMM') as month, count(1) as total "
 				+ " from logging_table group by level, month order by monthnum(month), level");
+		results.explain(true);
 		results.show(100);
 	}
 
