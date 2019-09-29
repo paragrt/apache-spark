@@ -31,7 +31,11 @@ import org.apache.spark.sql.types.DataTypes;
                            +- InMemoryRelation [level#10, datetime#11], StorageLevel(disk, memory, deserialized, 1 replicas)
                                  +- *(1) FileScan csv [level#10,datetime#11] Batched: false, Format: CSV, Location: InMemoryFileIndex[file:/home/paragrt/Desktop/github-repo/SparkTest/src/main/resources/biglog.txt], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<level:string,datetime:string>
 
+<<<<<<< HEAD
 JAVA API MODE Time=12973
+=======
+JAVA API MODE Time=17571
+>>>>>>> branch 'master' of https://github.com/paragrt/apache-spark.git
 == Physical Plan ==
 *(3) Project [level#10, month#24, count#34L]
 +- *(3) Sort [monthnum#26 ASC NULLS FIRST], true, 0
