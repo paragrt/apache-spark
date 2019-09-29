@@ -7,7 +7,7 @@ import static org.apache.spark.sql.functions.*;
 import org.apache.spark.sql.types.DataTypes;
 
 /**
- * 
+ * Updated the runtime stats.
  * @author paragrt
  *
  *The KEY difference is the HashAggregate vs the SortAggregate
