@@ -38,14 +38,27 @@ public class SparkML1 {
 		//Label and Featurees
 		modelInputData.show();
 		
-		//MODEL Fitting
+		//Split it into 80% for training and 20 for Test-Eval
+		Dataset<Row>[] trnAndTst = modelInputData.randomSplit(new double[] {0.8,0.2});
+		
+		//MODEL Fitting using training
 		LinearRegression lr = new LinearRegression();
-		LinearRegressionModel lrm = lr.fit(modelInputData);
+		LinearRegressionModel lrm = lr.fit(trnAndTst[0]);
 		
-		//PREDICT ( but we use same data to fit and evaluate...not really fair
-		lrm.transform(modelInputData).show();
+		//PREDICT using test.
+		lrm.transform(trnAndTst[1]).show();
+		/*
+		 * +-----+-----------------+------------------+
+|label|         features|        prediction|
++-----+-----------------+------------------+
+|   45|[23.0,163.0,65.0]| 48.76675091010117|
+|   49|[20.0,172.0,79.0]| 53.30229003930186|
+|   52|[24.0,180.0,78.0]| 51.84150239645719|
+|   53|[23.0,174.0,74.0]|50.994182120358246|
++-----+-----------------+------------------+
+		 */
 		
-		//split data into training and test data ...NEXT
+		
 	}
 
 }
