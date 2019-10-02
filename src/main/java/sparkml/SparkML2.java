@@ -9,54 +9,57 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
-public class SparkML1 {
+public class SparkML2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		long start = System.currentTimeMillis();
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
 		// TODO Auto-generated method stub
-		String logFile = "src/main/resources/GymCompetition.csv";
-		SparkSession spark = SparkSession.builder().appName("Spark ML").config("spark.master", "local[*]")
+		String logFile = "src/main/resources/kc_house_data.csv";
+		SparkSession spark = SparkSession.builder().appName("HousePriceAnalysis").config("spark.master", "local[*]")
 				.getOrCreate();
 		Dataset<Row> dataset = spark.read()
 				.option("header", true)
 				.option("inferSchema",  true)
 				.csv(logFile).cache();
 
-		//dataset.printSchema();
+		dataset.printSchema();
+		//dataset.show();
+		
 		
 		VectorAssembler va = new VectorAssembler()
-				.setInputCols(new String[] {"Age", "Height", "Weight"})
+				//.setInputCols(new String[] {"bedrooms", "bathrooms", "sqft_living"})
+				.setInputCols(new String[] {"bedrooms", "bathrooms", "sqft_living", "sqft_lot", "floors", "grade"})
 				.setOutputCol("features");
 		dataset = va.transform(dataset);
 
 		//dataset.show();
 		
-		Dataset<Row> modelInputData = dataset.select("NoOfReps", "features").withColumnRenamed("NoOfReps", "label");
+		Dataset<Row> modelInputData = dataset.select("price", "features").withColumnRenamed("price", "label");
 		
 		//Label and Features
 		modelInputData.show();
 		
 		//Split it into 80% for training and 20 for Test-Eval
 		Dataset<Row>[] trnAndTst = modelInputData.randomSplit(new double[] {0.8,0.2});
-		
+		Dataset<Row> trainingData = trnAndTst[0];
+		Dataset<Row> testData = trnAndTst[1];
 		//MODEL Fitting using training
 		LinearRegression lr = new LinearRegression();
-		LinearRegressionModel lrm = lr.fit(trnAndTst[0]);
 		
-		//PREDICT using test.
-		lrm.transform(trnAndTst[1]).show();
-		/*
-		 * +-----+-----------------+------------------+
-|label|         features|        prediction|
-+-----+-----------------+------------------+
-|   45|[23.0,163.0,65.0]| 48.76675091010117|
-|   49|[20.0,172.0,79.0]| 53.30229003930186|
-|   52|[24.0,180.0,78.0]| 51.84150239645719|
-|   53|[23.0,174.0,74.0]|50.994182120358246|
-+-----+-----------------+------------------+
-		 */
+		LinearRegressionModel lrm = lr.fit(trainingData);
+		
+		System.out.println("Model Training R2="+lrm.summary().r2() + " RMSE = " + lrm.summary().rootMeanSquaredError());
+		//PREDICT using test....
+		
+		//lrm.transform(testData).show();
+		
+		//Dont need to run transform and predict to run evaluate R2 rmse on test data
+		System.out.println("Model TEST R2="+lrm.evaluate(testData).r2() + " RMSE = " + lrm.evaluate(testData).rootMeanSquaredError());
+		
+		 //R-squared and RMSE
+		
 		
 		
 	}
