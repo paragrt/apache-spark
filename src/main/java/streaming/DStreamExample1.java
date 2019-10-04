@@ -13,13 +13,16 @@ import org.apache.spark.streaming.api.java.JavaStreamingContext;
 
 import scala.Tuple2;
 
+
+
 public class DStreamExample1 {
 	
 	public static void main(String[] args) throws InterruptedException {
 		Logger.getLogger("org.apache").setLevel(Level.WARN);
+		Logger.getLogger("org.apache.spark.storage").setLevel(Level.ERROR);
 		SparkConf conf = new SparkConf().
 				setMaster("local[2]").setAppName("NetworkWordCount");
-		JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(1) );
+		JavaStreamingContext jssc = new JavaStreamingContext(conf, Durations.seconds(30) );
 		
 		// Create a DStream that will connect to hostname:port, like localhost:9999
 		JavaReceiverInputDStream<String> lines = jssc.socketTextStream("localhost", 9999);
@@ -37,5 +40,4 @@ public class DStreamExample1 {
 		jssc.awaitTermination();
 		
 	}
-
 }

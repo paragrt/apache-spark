@@ -173,4 +173,6 @@
   <classpathentry kind="var" path="M2_REPO/org/typelevel/machinist_2.12/0.6.1/machinist_2.12-0.6.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/chuusai/shapeless_2.12/2.3.2/shapeless_2.12-2.3.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/typelevel/macro-compat_2.12/1.1.1/macro-compat_2.12-1.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/spark/spark-streaming-kafka-0-10_2.12/2.4.4/spark-streaming-kafka-0-10_2.12-2.4.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/kafka/kafka-clients/2.0.0/kafka-clients-2.0.0.jar"/>
 </classpath>
